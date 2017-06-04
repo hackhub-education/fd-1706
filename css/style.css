@@ -16,9 +16,14 @@ body {
 	background-color: #f0f0f0;
 	padding: 10px;
 	border: 1px solid white;
+	height: 50px;
 }
 
 .student-list a:hover {
 	background-color: #00ffff;
 }
 
+
+.remove-btn {
+	float: right;
+}
