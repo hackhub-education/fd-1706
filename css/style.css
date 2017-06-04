@@ -1,3 +1,24 @@
-a {
-			display: block;
-		}
+body {
+	font-family: Helvetica, Arial, sans-serif;
+}
+
+.get-student-info {
+	display: block;
+}
+
+.student-info {
+	float: left;
+	background-color: #f0f0f0;
+	padding: 20px;
+}	
+
+.student-list a {
+	background-color: #f0f0f0;
+	padding: 10px;
+	border: 1px solid white;
+}
+
+.student-list a:hover {
+	background-color: #00ffff;
+}
+

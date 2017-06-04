@@ -8,13 +8,15 @@ $.get(host + 'student', function(response) {
 	// 	.appendTo('body')
 	// }
 
+	console.log(response)
+
 	response.forEach(function(student) {
 		$('<a>')
 			.text(student.name)
 			.addClass('get-student-info')
 			.attr('id', student._id)
 			// .attr('href', 'http://192.168.1.124:3000/student/' + student._id)
-			.appendTo('body')
+			.appendTo('.student-list')
 	})
 
 	// $('.get-student-info').click(function() {
@@ -26,7 +28,11 @@ $.get(host + 'student', function(response) {
 
 $('body').on('click', '.get-student-info', function(e) {
 	$.get(host + 'student/' + e.target.id, function(response) {
-		console.log(response);
+		
+		$('.student-name').text(response.name || "");
+		$('.student-age').text(response.age || "");
+		$('.student-school').text(response.school || "");
+
 	})
 
 })
