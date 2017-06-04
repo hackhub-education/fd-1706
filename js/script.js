@@ -1,5 +1,7 @@
 var host = 'https://webdxd-student-api.herokuapp.com/'
 
+var selectedStudent = {}
+
 $.get(host + 'student', function(response) {
 	// for (var i = 0; i < response.length; i++) {
 	// 	$('<a>')
@@ -7,8 +9,6 @@ $.get(host + 'student', function(response) {
 	// 	.attr('href', 'http://192.168.1.124:3000/student/' + response[i]._id)
 	// 	.appendTo('body')
 	// }
-
-	console.log(response)
 
 	response.forEach(function(student) {
 		var listItem = $('<a>')
@@ -30,10 +30,14 @@ $.get(host + 'student', function(response) {
 
 $('body').on('click', '.get-student-info', function(e) {
 	$.get(host + 'student/' + e.target.id, function(response) {
+
+		selectedStudent = response
+
+		$('.student-info, .update-info').show()
 		
-		$('.student-name').text(response.name || "");
-		$('.student-age').text(response.age || "");
-		$('.student-school').text(response.school || "");
+		$('.student-name').text(selectedStudent.name || "");
+		$('.student-age').text(selectedStudent.age || "");
+		$('.student-school').text(selectedStudent.school || "");
 		$('.update-info').attr('data-id', e.target.id);
 
 	})
@@ -59,10 +63,10 @@ $('body').on('click', '.update-info', function(e) {
 	$('.update-form').show();
 	$('.update-info').hide();
 
-	$('#update-name').val($('.student-name').text() || "");
-	$('#update-age').val($('.student-age').text() || "");
-	$('#update-school').val($('.student-school').text() || "");
-	$('#update-id').val($('.update-info').attr('data-id') || "");
+	$('#update-name').val(selectedStudent.name || "");
+	$('#update-age').val(selectedStudent.age || "");
+	$('#update-school').val(selectedStudent.school || "");
+	$('#update-id').val(selectedStudent._id || "");
 })
 
 
@@ -70,24 +74,25 @@ $('body').on('click', '.submit-update', function(e) {
 
 	e.preventDefault();
 
-	var student = {
+	selectedStudent = {
 		"_id": $('#update-id').val(),
 		"name": $('#update-name').val(),
 		"age": $('#update-age').val(),
 		"school": $('#update-school').val()
 	}
-console.log(student)
 
 	$.ajax({
 	  type: "POST",
 	  url: host+'update',
-	  data: JSON.stringify(student),
+	  data: JSON.stringify(selectedStudent),
 	  success: function(response) {
-	  	console.log(response)
-	  	$('.student-name').text(student.name || "");
-		$('.student-age').text(student.age || "");
-		$('.student-school').text(student.school || "");
-		$('#' + student._id).find('p').text(student.name)
+	  	$('.student-name').text(selectedStudent.name || "");
+		$('.student-age').text(selectedStudent.age || "");
+		$('.student-school').text(selectedStudent.school || "");
+		$('#' + selectedStudent._id).find('p').text(selectedStudent.name)
+		$('#update-id, #update-name, #update-age, #update-school').val('');
+		$('.update-form').hide();
+		$('.update-info').show();
 	  },
 	  dataType: 'json',
 	  contentType: 'application/json',
@@ -117,6 +122,9 @@ $('#submit-add').click(function(e) {
 			.addClass('get-student-info')
 			.attr('id', response._id)
 			.appendTo('.student-list')
+			$('.add-form').hide();
+			$('.add-btn').show();
+			$('#name, #age, #school').val('');
 	  },
 	  dataType: 'json',
 	  contentType: 'application/json',
@@ -128,4 +136,9 @@ $('#submit-add').click(function(e) {
 
 })
 
+
+$('.add-btn').click(function() {
+	$('.add-form').show();
+	$(this).hide();
+})
 

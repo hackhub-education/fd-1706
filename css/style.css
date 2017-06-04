@@ -2,6 +2,16 @@ body {
 	font-family: Helvetica, Arial, sans-serif;
 }
 
+button, input {
+	border: 1px solid #f0f0f0;
+	padding: 5px;
+	font-size: 15px;
+	background-color: white;
+	border-radius: 5px;
+	display: block;
+	margin: 10px;
+}
+
 .get-student-info {
 	display: block;
 }
@@ -10,13 +20,23 @@ body {
 	float: left;
 	background-color: #f0f0f0;
 	padding: 20px;
+	display: none;
 }	
+
+.student-list {
+	width: 40%;
+	float: left;
+}
 
 .student-list a {
 	background-color: #f0f0f0;
 	padding: 10px;
 	border: 1px solid white;
 	height: 50px;
+}
+
+.student-list a p {
+	float: left;
 }
 
 .student-list a:hover {
@@ -26,9 +46,10 @@ body {
 
 .remove-btn {
 	float: right;
+	border: none;
 }
 
 
-.update-form {
+.update-form, .add-form, .update-info {
 	display: none;
 }
