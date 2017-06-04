@@ -76,13 +76,14 @@ $('body').on('click', '.submit-update', function(e) {
 		"age": $('#update-age').val(),
 		"school": $('#update-school').val()
 	}
-
+console.log(student)
 
 	$.ajax({
 	  type: "POST",
 	  url: host+'update',
 	  data: JSON.stringify(student),
 	  success: function(response) {
+	  	console.log(response)
 	  	$('.student-name').text(student.name || "");
 		$('.student-age').text(student.age || "");
 		$('.student-school').text(student.school || "");
