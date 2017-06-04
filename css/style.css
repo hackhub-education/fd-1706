@@ -27,3 +27,8 @@ body {
 .remove-btn {
 	float: right;
 }
+
+
+.update-form {
+	display: none;
+}
