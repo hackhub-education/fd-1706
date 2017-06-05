@@ -1,3 +1,6 @@
+require('../css/style.css')
+var $ = require('./jquery.js')
+
 var host = 'https://webdxd-student-api.herokuapp.com/'
 
 var selectedStudent = {}
